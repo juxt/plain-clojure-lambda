@@ -8,14 +8,26 @@
 (def uber-file (format "target/%s-%s-standalone.jar" (name lib) version))
 
 (defn clean [_]
-  (b/delete {:path "target"}))
+  (println "Deleting target directory")
+  (b/delete {:path "target"})
+  (println "Deleting compiled cljs")
+  (b/delete {:path "resources/public/js/compiled"}))
+
+(defn compile-cljs []
+  (println "Compiling cljs")
+  (let [{:keys [exit]} (b/process {:command-args ["npx" "shadow-cljs" "release" "app"]})]
+    (when-not (= 0 exit)
+      (throw (ex-info "Failed to compile cljs" {:exit exit})))))
 
 (defn uber [_]
+  (compile-cljs)
+  (println "Compiling clj")
   (b/copy-dir {:src-dirs ["src" "resources"]
                :target-dir class-dir})
   (b/compile-clj {:basis @basis
                   :src-dirs ["src"]
                   :class-dir class-dir})
+  (println "Building uberjar")
   (b/uber {:class-dir class-dir
            :uber-file uber-file
            :basis @basis}))

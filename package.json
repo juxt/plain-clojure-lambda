@@ -1,0 +1,7 @@
+{
+  "name": "lambda",
+  "packageManager": "yarn@3.5.0",
+  "dependencies": {
+    "shadow-cljs": "^2.28.8"
+  }
+}

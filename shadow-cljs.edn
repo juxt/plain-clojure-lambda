@@ -1,0 +1,6 @@
+{:deps {:aliases [:cljs :dev]}
+ :builds
+ {:app
+  {:target :browser
+   :modules {:app {:entries [app]}}
+   :output-dir "resources/public/js/compiled"}}}
