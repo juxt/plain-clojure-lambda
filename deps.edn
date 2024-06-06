@@ -1,0 +1,6 @@
+{:paths ["src"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        com.amazonaws/aws-lambda-java-core {:mvn/version "1.2.3"}}
+ :aliases
+ {:build {:extra-deps {io.github.clojure/tools.build {:git/tag "v0.8.4" :git/sha "8c3cd69"}}
+          :ns-default build}}}

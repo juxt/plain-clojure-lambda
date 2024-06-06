@@ -1,0 +1,5 @@
+.clj-kondo/
+.lsp/
+.cpcache/
+target/
+.DS_Store
